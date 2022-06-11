@@ -1,0 +1,259 @@
+
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.13;
+
+import {LibBl0xck, Bl0xciInfo} from "../libraries/LibBl0xckGarden.sol";
+import {IERC721} from "../../shared/interfaces/IERC721.sol";
+import {LibERC20} from "../../shared/libraries/LibERC20.sol";
+import {IERC20} from "../../shared/interfaces/IERC20.sol";
+import {LibMeta} from "../../shared/libraries/LibMeta.sol";
+import {LibBl0ckGarden} from "../libraries/LibBl0xckGarden.sol";
+import {Modifiers, Bl0xckBarden} from "../libraries/LibAppStorage.sol";
+
+contract Bl0xGardenFacet is Modifiers {
+    ///@param _erc721TokenId The identifier of the NFT to lend
+    ///@param _initialCost The lending fee of the bl0xck in $Da0
+    ///@param _period The lending period of the bl0xck, unit: second
+    ///@param _revenueSplit The revenue split of the lending, 3 values, sum of the should be 100
+    ///@param _originalOwner The account for original owner, can be set to another address if the owner wishes to have profit split there.
+    ///@param _thirdParty The 3rd account for receive revenue split, can be address(0)
+    ///@param _whitelistId The identifier of whitelist for agree lending, if 0, allow everyone
+    struct AddBl0xckListing {
+        uint32 tokenId;
+        uint96 initialCost;
+        uint32 period;
+        uint8[3] revenueSplit;
+        address originalOwner;
+        address thirdParty;
+        uint32 whitelistId;
+        address[] revenueTokens;
+    }
+
+    ///@notice Allow an bl0xck lender (msg sender) or their lending operator to add request for lending
+    ///@dev If the lending request exist, cancel it and replaces it with the new one
+    ///@dev If the lending is active, unable to cancel
+    function addBl0xckListing(AddBl0xckListing memory p) public {
+        address sender = LibMeta.msgSender();
+        address tokenOwner = s.bl0xcks[p.tokenId].owner;
+        bool isLendingOperator = s.lendingOperators[tokenOwner][sender][p.tokenId];
+        require(tokenOwner == sender || isLendingOperator, "Bl0xckLending: Only the owner or a lending operator can add a lending request");
+        LibBl0xckLending.LibAddBl0xckLending memory addLendingStruct = LibBl0xckLending.LibAddBl0xckLending({
+            lender: tokenOwner,
+            tokenId: p.tokenId,
+            initialCost: p.initialCost,
+            period: p.period,
+            revenueSplit: p.revenueSplit,
+            originalOwner: p.originalOwner,
+            thirdParty: p.thirdParty,
+            whitelistId: p.whitelistId,
+            revenueTokens: p.revenueTokens
+        });
+        LibBl0xckLending._addBl0xckLending(addLendingStruct);
+    }
+
+    ///@notice Allow an bl0xck lender or lending operator to cancel his NFT lending through the listingId
+    ///@param _listingId The identifier of the lending to be cancelled
+    function cancelBl0xckLending(uint32 _listingId) public {
+        Bl0xckLending storage lending = s.bl0xckLendings[_listingId];
+        require(lending.timeCreated != 0, "Bl0xckLending: Listing not found");
+        address sender = LibMeta.msgSender();
+        address lender = lending.lender;
+        require(
+            lender == sender || s.lendingOperators[lender][sender][lending.erc721TokenId],
+            "Bl0xckLending: Only the lender or lending operator can cancel the lending"
+        );
+        LibBl0xckLending.cancelBl0xckLending(_listingId, lender);
+    }
+
+    ///@notice Allow a borrower to agree an lending for the NFT
+    ///@dev Will throw if the NFT has been lent or if the lending has been canceled already
+    ///@param _listingId The identifier of the lending to agree
+    function agreeBl0xckLending(
+        uint32 _listingId,
+        uint32 _erc721TokenId,
+        uint96 _initialCost,
+        uint32 _period,
+        uint8[3] calldata _revenueSplit
+    ) external {
+        address sender = LibMeta.msgSender();
+        //LibBl0xckLending.addBorrowerTokenId(sender, _erc721TokenId); // This functions as a check for whether the sender already has a borrow after the upgrade
+        LibBl0xckLending._agreeBl0xckLending(sender, _listingId, _erc721TokenId, _initialCost, _period, _revenueSplit);
+    }
+
+    ///@notice Allow to claim revenue from the lending
+    ///@dev Will throw if the NFT has not been lent or if the lending has been canceled already
+    ///@param _tokenId The identifier of the lent bl0xck to claim
+    function claimBl0xckLending(uint32 _tokenId) public {
+        uint32 listingId = LibBl0xckLending.tokenIdToListingId(_tokenId);
+        Bl0xckLending storage lending = s.bl0xckLendings[listingId];
+        address lender = lending.lender;
+        address sender = LibMeta.msgSender();
+        require(
+            (lender == sender) || (lending.borrower == sender) || s.lendingOperators[lender][sender][_tokenId],
+            "Bl0xckLending: Only lender or borrower or lending operator can claim"
+        );
+        LibBl0xckLending.claimBl0xckLending(listingId);
+    }
+
+    ///@notice Allow a lender or borrower or lending operator to claim revenue from the lending and end the listing
+    ///@dev Will throw if the NFT has not been lent or if the lending has been canceled already
+    ///@param _tokenId The identifier of the lent bl0xck to claim
+    function claimAndEndBl0xckLending(uint32 _tokenId) public {
+        uint32 listingId = LibBl0xckLending.tokenIdToListingId(_tokenId);
+        Bl0xckLending storage lending = s.bl0xckLendings[listingId];
+
+        address lender = lending.lender;
+        address borrower = lending.borrower;
+        address sender = LibMeta.msgSender();
+        uint32 period = lending.period < 2_592_000 ? lending.period : 2_592_000;
+        require(
+            (lender == sender) || (borrower == sender) || s.lendingOperators[lender][sender][_tokenId],
+            "Bl0xckLending: Only lender or borrower or lending operator can claim and end agreement"
+        );
+        require(borrower == sender || lending.timeAgreed + period <= block.timestamp, "Bl0xckLending: Agreement not over and not borrower");
+
+        //LibBl0xckLending.removeBorrowerTokenId(borrower, _tokenId); // Free up the borrower to borrow another bl0xck
+        LibBl0xckLending.claimBl0xckLending(listingId);
+        LibBl0xckLending.endBl0xckLending(lending);
+    }
+
+    ///@notice Allows a lender or lending operator to extend a current listing
+    function extendBl0xckLending(uint32 _tokenId, uint32 extension) public {
+        Bl0xckLending storage lending = s.bl0xckLendings[LibBl0xckLending.tokenIdToListingId(_tokenId)];
+        address lender = lending.lender;
+        address sender = LibMeta.msgSender();
+        require(lender == sender || s.lendingOperators[lender][sender][_tokenId], "Bl0xckLending: Only lender or lending operator can extend");
+        require(lending.timeAgreed != 0 && !lending.completed, "Bl0xckLending: Cannot extend a listing that has not been borrowed");
+        require(lending.period + extension < 2_592_000, "Bl0xckLending: Cannot extend a listing beyond the maximum period");
+        lending.period += extension;
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// From here on, functions require no checks as the functions they call take care of the checks
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ///@notice Exists to keep the same function signature as previous
+    function addBl0xckLending(
+        uint32 _erc721TokenId,
+        uint96 _initialCost,
+        uint32 _period,
+        uint8[3] calldata _revenueSplit,
+        address _originalOwner,
+        address _thirdParty,
+        uint32 _whitelistId,
+        address[] calldata _revenueTokens
+    ) external {
+        uint8[3] memory revenueSplit = _revenueSplit;
+        address[] memory revenueTokens = _revenueTokens;
+        AddBl0xckListing memory listing = AddBl0xckListing({
+            tokenId: _erc721TokenId,
+            initialCost: _initialCost,
+            period: _period,
+            revenueSplit: revenueSplit,
+            originalOwner: _originalOwner,
+            thirdParty: _thirdParty,
+            whitelistId: _whitelistId,
+            revenueTokens: revenueTokens
+        });
+        addBl0xckListing(listing);
+    }
+
+    ///@notice Allow an bl0xck lender to cancel his NFT lending by providing the NFT contract address and identifier
+    ///@param _erc721TokenId The identifier of the NFT to be delisted from lending
+    function cancelBl0xckLendingByToken(uint32 _erc721TokenId) public {
+        cancelBl0xckLending(s.bl0xckToListingId[_erc721TokenId]);
+    }
+
+    ///@notice Allows a lender or pet operator to end the listing and relist with the same parameters
+    function claimAndEndAndRelistBl0xckLending(uint32 _tokenId) public {
+        Bl0xckLending memory lending = s.bl0xckLendings[LibBl0xckLending.tokenIdToListingId(_tokenId)];
+        claimAndEndBl0xckLending(_tokenId);
+        addBl0xckListing(
+            AddBl0xckListing({
+                tokenId: lending.erc721TokenId,
+                initialCost: lending.initialCost,
+                period: lending.period,
+                revenueSplit: lending.revenueSplit,
+                originalOwner: lending.originalOwner,
+                thirdParty: lending.thirdParty,
+                whitelistId: lending.whitelistId,
+                revenueTokens: lending.revenueTokens
+            })
+        );
+    }
+
+    ///@notice Add bl0xck listings in batch
+    function batchAddBl0xckListing(AddBl0xckListing[] memory listings) external {
+        for (uint256 i = 0; i < listings.length; ) {
+            addBl0xckListing(listings[i]);
+            unchecked {
+                ++i;
+            }
+        }
+    }
+
+    ///@notice Cancel bl0xck listings in batch by listing ID
+    function batchCancelBl0xckLending(uint32[] calldata _listingIds) external {
+        for (uint256 i = 0; i < _listingIds.length; ) {
+            cancelBl0xckLending(_listingIds[i]);
+            unchecked {
+                ++i;
+            }
+        }
+    }
+
+    ///@notice Cancel bl0xck listings in batch by token ID
+    function batchCancelBl0xckLendingByToken(uint32[] calldata _erc721TokenIds) external {
+        for (uint256 i = 0; i < _erc721TokenIds.length; ) {
+            cancelBl0xckLendingByToken(_erc721TokenIds[i]);
+            unchecked {
+                ++i;
+            }
+        }
+    }
+
+    ///@notice Claim bl0xck lendings in batch by token ID
+    function batchClaimBl0xckLending(uint32[] calldata _tokenIds) external {
+        for (uint256 i = 0; i < _tokenIds.length; ) {
+            claimBl0xckLending(_tokenIds[i]);
+            unchecked {
+                ++i;
+            }
+        }
+    }
+
+    ///@notice Claim and end bl0xck lendings in batch by token ID
+    function batchClaimAndEndBl0xckLending(uint32[] calldata _tokenIds) external {
+        for (uint256 i = 0; i < _tokenIds.length; ) {
+            claimAndEndBl0xckLending(_tokenIds[i]);
+            unchecked {
+                ++i;
+            }
+        }
+    }
+
+    ///@notice Claim and end and relist bl0xck lendings in batch by token ID
+    function batchClaimAndEndAndRelistBl0xckLending(uint32[] calldata _tokenIds) external {
+        for (uint256 i = 0; i < _tokenIds.length; ) {
+            claimAndEndAndRelistBl0xckLending(_tokenIds[i]);
+            unchecked {
+                ++i;
+            }
+        }
+    }
+
+    struct BatchRenew {
+        uint32 tokenId;
+        uint32 extension;
+    }
+
+    ///@notice Extend bl0xck listings in batch by token ID
+    function batchExtendBl0xckLending(BatchRenew[] calldata _batchRenewParams) external {
+        for (uint256 i = 0; i < _batchRenewParams.length; ) {
+            extendBl0xckLending(_batchRenewParams[i].tokenId, _batchRenewParams[i].extension);
+            unchecked {
+                ++i;
+            }
+        }
+    }
+}

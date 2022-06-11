@@ -1,0 +1,17 @@
+{
+  "name": "da0xlin",
+  "version": "1.0.0",
+  "description": "DAO0xLin - ETHGlobal - HackMoney 5.22 ",
+  "main": "index.tsx",
+  "repository": "https://github.com/zen2see/DA0xLIN.git",
+  "author": "zen2see",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/hardhat",
+      "packages/da0xlinapp",
+      "packages/da0xlinmobile"
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "helpers/types"
+    ],
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true
+  },
+  "rootDir": ".",
+  "baseUrl": ".",
+  "outDir": "dist",
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/**/*.ts*",
+    "src/helpers/__global.ts",
+    "pages/_app.tsx",
+    "./scripts",
+    "./test",
+    "next.config.js",
+    "postcss.config.js",
+    "postcss.config.js",
+    "tailwind.config.js"
+, "src/pages/_document.js", "public/assets/coins/svg/search.js", "public/assets/coins/svg/search.js", "public/assets/coins/svg/chevronDown.jsx", "src/components/cmcTables/Rate.js", "src/pages/api/getTopTen.ts"  ],
+  "paths": {
+    "src/*": [
+      "src/*"
+    ]
+  },
+  "exclude": [
+    "**/node_modules",
+    ".husky",
+    "./src/styles/css",
+    "tailwind.config.ts",
+    "node_modules",
+    "**/.yalc/**/*",
+    ".yalc/**/*"
+  ]
+}
