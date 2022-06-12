@@ -1,16 +1,10 @@
 import 'tailwindcss/tailwind.css'
-import type { AppProps } from 'next/app'
+import '../styles/Globals'
 import '../index.css'
-import { CoinMarketProvider } from '../context/context'
+import type { AppProps } from 'next/app'
 
-function App({ Component, pageProps }: AppProps) {
-  return (
-    <CoinMarketProvider>
-      <Component {...pageProps} />
-    </CoinMarketProvider>
-
-  ) 
+function MyApp({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />
 }
 
-export default App
-      
+export default MyApp

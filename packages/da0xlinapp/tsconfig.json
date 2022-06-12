@@ -41,8 +41,14 @@
     "next.config.js",
     "postcss.config.js",
     "postcss.config.js",
-    "tailwind.config.js"
-, "src/pages/_document.js", "public/assets/coins/svg/search.js", "public/assets/coins/svg/search.js", "public/assets/coins/svg/chevronDown.jsx", "src/components/cmcTables/Rate.js", "src/pages/api/getTopTen.ts"  ],
+    "tailwind.config.js",
+    "src/pages/_document.js",
+    "public/assets/coins/svg/search.js",
+    "public/assets/coins/svg/search.js",
+    "public/assets/coins/svg/chevronDown.jsx",
+    "src/components/cmcTables/Rate.js",
+    "src/pages/api/getTopTen.ts"
+  ],
   "paths": {
     "src/*": [
       "src/*"

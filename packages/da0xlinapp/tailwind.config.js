@@ -17,14 +17,27 @@ module.exports = {
         16: "1.6",
       },
     },
-    screens: {
-      lg: { max: "1800px" },
-      md: { max: "990px" },
-      sm: { max: "600px" },
-      xs: { max: "400px" },
-      minmd: "1700px",
-      minlg: "2100px",
+    // screens: {
+    //   lg: { max: "1800px" },
+    //   md: { max: "990px" },
+    //   sm: { max: "600px" },
+    //   xs: { max: "400px" },
+    //   minmd: "1200px",
+    //   minlg: "2100px",
+    // },
+     screens: {
+      sm: '480px',
+      md: '768px',
+      lg: '976px',
+      xl: '1440px',
     },
+    // minHeight: {
+    //   '0': '0',
+    //   '1/4': '25%',
+    //   '1/2': '50%',
+    //   '3/4': '75%',
+    //   'full': '100%',
+    //  },
     fontFamily: {
       ReggaeOne: ["Reggae One", "cursive"]
     },

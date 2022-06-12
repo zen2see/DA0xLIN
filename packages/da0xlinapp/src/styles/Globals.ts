@@ -5,6 +5,7 @@ const styles = {
   dkgreyText: "text-slate-700",
   orangeText: "text-orange-600",
   neutralText: "text-neutral-700",
+  blue100Text: "text-blue-100",
 
   bgWhite: "bg-white",
   bgPrimary: "bg-primary",
