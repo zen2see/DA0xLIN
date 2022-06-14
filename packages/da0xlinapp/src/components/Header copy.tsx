@@ -122,9 +122,9 @@ export const Header = () => {
   const connect = useCallback(async function () {
     // This is the initial `provider` that is returned when
     // using web3Modal to connect. Can be MetaMask or WalletConnect.
-    const provider = await web3Modal.connect()
-
-
+      const provider = await web3Modal.connect()
+   
+   
     // We plug the initial `provider` into ethers.js and get back
     // a Web3Provider. This will add on methods from ethers.js and
     // event listeners such as `.on()` will be different.
@@ -205,15 +205,15 @@ export const Header = () => {
   const chainData = getChainData(chainId)
   const [loadingState, setLoadingState] = useState('not-loaded')
   // const [mood, setMood] = useState()
-
+  
   console.log(loadingState)
   console.log(chainData)
   console.log(state)
-
+  
   return (
-    <>
+    <>  
       <div className={`${styles.bgPrimary} ${styles.walletHeader}`}>
-        <Image
+        <Image 
           src={da0xlinlogo2}
           alt='da0xlinlogo2'
           width={160}
@@ -231,7 +231,7 @@ export const Header = () => {
             <div className={`${styles.headerNavItem}`}>
               <div className={`${styles.navLink}`}>
                 Cryptocurrencies
-                <div className={`${styles.navBadge}`} />
+                <div className={`${styles.navBadge}`}/>
               </div>
             </div>
             <div className={`${styles.headerNavItem}`}>
@@ -241,7 +241,7 @@ export const Header = () => {
             </div>
             <div className={`${styles.headerNavItem}`}>
               <div className={`${styles.navLink}`}>
-                NFT
+                NFT 
                 <div className={`${styles.navBadge}`} />
               </div>
             </div>
@@ -260,44 +260,44 @@ export const Header = () => {
               <div className={`${styles.navLink}`}>
                 Watchlist
               </div>
+            </div>   
+          
+      
+          <div className={`${styles.searchContainer}`}>
+            <Image
+              src={search}
+              alt='search'
+              width={20}
+              height={20}
+            />
+            <input className={styles.input} placeholder='Search' />
+          </div>
+          
+          <div className={`flex shrink-0`}>
+            <div className={`${styles.whiteText} absolute top-4 right-142`}>
+              {web3Provider ? (
+                <button className={`${styles.btnDisconnect}`} onClick={disconnect}>
+                  Disconnect wallet
+                </button>
+              ) : (
+                <button className={`${styles.btnConnect}`} onClick={connect}>
+                  Connect wallet
+                </button>
+              )}
             </div>
-
-
-            <div className={`${styles.searchContainer}`}>
-              <Image
-                src={search}
-                alt='search'
-                width={20}
-                height={20}
-              />
-              <input className={styles.input} placeholder='Search' />
-            </div>
-
-            <div className={`flex shrink-0`}>
-              <div className={`${styles.whiteText} absolute top-4 right-142`}>
-                {web3Provider ? (
-                  <button className={`${styles.btnDisconnect}`} onClick={disconnect}>
-                    Disconnect wallet
-                  </button>
-                ) : (
-                  <button className={`${styles.btnConnect}`} onClick={connect}>
-                    Connect wallet
-                  </button>
-                )}
-              </div>
-              {address ? (
-                <div className={`gap-[1px] pl-5 absolute top-2 right-5 `}>
-                  <div
-                    className={`text-amber-400 text-sm`}
-                    placeholder='Network'>{chainData?.name}
-                  </div>
-                  <div
-                    className={`text-amber-200`}
-                    placeholder='Address'>{ellipseAddress(address)}
-                  </div>
+            {address ? (
+              <div className={`gap-[1px] pl-5 absolute top-2 right-5 `}>
+                <div
+                  className={`text-amber-400 text-sm`}
+                  placeholder='Network'>{chainData?.name}
                 </div>
-              ) : <p className={`${styles.bgPrimary} `} > </p>}
-            </div>
+                <div
+                  className={`text-amber-200`}
+                  placeholder='Address'>{ellipseAddress(address)}
+                </div>
+              </div>
+            ) : <p className={`${styles.bgPrimary} `} > </p>}
+          </div>
           </nav>
         </div>
       </div>

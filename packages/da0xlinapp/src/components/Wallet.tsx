@@ -1,25 +1,12 @@
-import Head from 'next/head'
-import { ethers, providers } from 'ethers'
 import { useEffect, useState, useCallback, useReducer } from 'react'
+import { ethers, providers } from 'ethers'
+import { ellipseAddress, getChainData } from '../config/chaindata'
 import Web3Modal from 'web3modal'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import CoinbaseWalletSDK from '@coinbase/wallet-sdk'
-import { ellipseAddress, getChainData } from '../config/chaindata'
-import styles from '../styles/Globals'
-import Image from 'next/image'
-import da0xlinlogo2 from '../../public/assets/da0xlinlogo2.svg'
-import search from '../../public/assets/coins/svg/search.svg'
-import * as UAuthWeb3Modal from '@uauth/web3modal'
-import UAuthSPA from '@uauth/js'
-
-
+// import { bl0xckgardenfacetaddress } from '../config/contractContext'
+// import Bl0xckGardenFacet from '../../../hardhat/artifacts/contracts/Bl0xckGardenFacet.sol/Bl0xckGardenFacet.json'
 const INFURA_ID = process.env.INFURA_PID
-
-export const uauthOptions = {
-  clientID: 'client_id',
-  redirectUri: 'http://localhost:3000',
-  scope: 'openid wallet',
-}
 
 const providerOptions = {
   walletconnect: {
@@ -35,7 +22,7 @@ const providerOptions = {
       description: 'Connect to Coinbase Wallet (not Coinbase App)',
     },
     options: {
-      appName: 'DA0xLIN', // Your app name
+      appName: 'Bl0xcKB0xARD', // Your app name
       networkUrl: `https://mainnet.infura.io/v3/${INFURA_ID}`,
       chainId: 1,
     },
@@ -123,7 +110,7 @@ function reducer(state: StateType, action: ActionType): StateType {
   }
 }
 
-export const Header = () => {
+export const Wallet = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const { provider, web3Provider, address, chainId } = state
 
@@ -131,8 +118,8 @@ export const Header = () => {
     // This is the initial `provider` that is returned when
     // using web3Modal to connect. Can be MetaMask or WalletConnect.
     const provider = await web3Modal.connect()
-
-
+   
+   
     // We plug the initial `provider` into ethers.js and get back
     // a Web3Provider. This will add on methods from ethers.js and
     // event listeners such as `.on()` will be different.
@@ -213,106 +200,10 @@ export const Header = () => {
   const chainData = getChainData(chainId)
   const [loadingState, setLoadingState] = useState('not-loaded')
   // const [mood, setMood] = useState()
-
+  
   console.log(loadingState)
   console.log(chainData)
   console.log(state)
-
-  return (
-    <>
-      <div className={`${styles.bgPrimary} ${styles.walletHeader}`}>
-        <Image
-          src={da0xlinlogo2}
-          alt='da0xlinlogo2'
-          width={160}
-          height={100}
-        />
-        {/* <Image
-          src={da0xlinlogo}
-          alt='da0xlinlogo'
-          width={160}
-          height={100}
-        /> */}
-
-        <div className={`${styles.walletHeaderWrapper}`}>
-          <nav className={`${styles.headerNav}`}>
-            <div className={`${styles.headerNavItem}`}>
-              <div className={`${styles.navLink}`}>
-                Cryptocurrencies
-                <div className={`${styles.navBadge}`} />
-              </div>
-            </div>
-            <div className={`${styles.headerNavItem}`}>
-              <div className={`${styles.navLink}`}>
-                Exchanges
-              </div>
-            </div>
-            <div className={`${styles.headerNavItem}`}>
-              <div className={`${styles.navLink}`}>
-                NFT
-                <div className={`${styles.navBadge}`} />
-              </div>
-            </div>
-            <div className={`${styles.headerNavItem}`}>
-              <div className={`${styles.navLink}`}>
-                Cryptown
-                <div className={`${styles.navBadge}`} />
-              </div>
-            </div>
-            <div className={`${styles.headerNavItem}`}>
-              <div className={`${styles.navLink}`}>
-                Portfolio
-              </div>
-            </div>
-            <div className={`${styles.headerNavItem}`}>
-              <div className={`${styles.navLink}`}>
-                Watchlist
-              </div>
-            </div>
-
-
-            <div className={`${styles.searchContainer}`}>
-              <Image
-                src={search}
-                alt='search'
-                width={20}
-                height={20}
-              />
-              <input className={styles.input} placeholder='Search' />
-            </div>
-
-            <div className={`flex-nowrap`}>
-              <div className={`${styles.whiteText}  top-4 right-142`}>
-                {web3Provider ? (
-                  <button className={`${styles.btnDisconnect} flex-nowrap shrink-0`} onClick={disconnect}>
-                    Disconnect wallet
-                  </button>
-                ) : (
-                  <button className={`${styles.btnConnect} flex-nowrap shrink-0`} onClick={connect}>
-                    Connect wallet
-                  </button>
-                )}
-              </div>
-              {address ? (
-                <div className={`gap-[1px] pl-5 absolute top-2 right-5 `}>
-                  <div
-                    className={`text-amber-400 text-sm`}
-                    placeholder='Network'>{chainData?.name}
-                  </div>
-                  <div
-                    className={`text-amber-200`}
-                    placeholder='Address'>{ellipseAddress(address)}
-                  </div>
-                </div>
-              ) : <p className={`${styles.bgPrimary} `} > </p>}
-            </div>
-          </nav>
-        </div>
-      </div>
-    </>
-  )
 }
 
-export default Header
-
-
+export default Wallet

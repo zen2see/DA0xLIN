@@ -48,7 +48,7 @@
     "public/assets/coins/svg/chevronDown.jsx",
     "src/components/cmcTables/Rate.js",
     "src/pages/api/getTopTen.ts"
-  ],
+, "src/components/CoinHeader.jsx", "src/components/cmc-table/cmcTable.js", "src/components/Coinheader.jsx"  ],
   "paths": {
     "src/*": [
       "src/*"

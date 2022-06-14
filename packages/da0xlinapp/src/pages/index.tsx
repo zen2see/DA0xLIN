@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Header from '../components/Header'
-import Navbar from '../components/Navbar'
+import Trending from '../components/Trending'
+import CMCTable from '../components/cmcTables/CMCTable'
 
 export const Home = (): JSX.Element => {
   return (
@@ -12,8 +13,13 @@ export const Home = (): JSX.Element => {
       </Head>
 
       <div className={`bannerDa0xlin min-h-screen`}>
-        <Navbar />
         <Header />
+        <div className={`mt-10`} />
+        <Trending />
+        <div className={`mt-5`} />
+        <div className={`px-20`}>
+          <CMCTable />
+        </div>
       </div>
     </>
   )
