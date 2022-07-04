@@ -11,7 +11,7 @@ import da0xlinlogo2 from '../../public/assets/da0xlinlogo2.svg'
 import search from '../../public/assets/coins/svg/search.svg'
 import * as UAuthWeb3Modal from '@uauth/web3modal'
 import UAuthSPA from '@uauth/js'
-
+import Link from 'next/link'
 
 const INFURA_ID = process.env.INFURA_PID
 
@@ -221,19 +221,18 @@ export const Header = () => {
   return (
     <>
       <div className={`${styles.bgPrimary} ${styles.walletHeader}`}>
-        <Image
-          src={da0xlinlogo2}
-          alt='da0xlinlogo2'
-          width={160}
-          height={100}
-        />
-        {/* <Image
-          src={da0xlinlogo}
-          alt='da0xlinlogo'
-          width={160}
-          height={100}
-        /> */}
-
+        <Link href='/'>
+          <a>
+            <Image
+              src={da0xlinlogo2}
+              alt='da0xlinlogo2'
+              width={160}
+              height={100}
+            />
+          </a>
+          
+        </Link>
+      
         <div className={`${styles.walletHeaderWrapper}`}>
           <nav className={`${styles.headerNav}`}>
             <div className={`${styles.headerNavItem}`}>

@@ -11,6 +11,8 @@ import terra from '../../public/assets/coins/terra.png'
 import solana from '../../public/assets/coins/solana.png'
 import avalanche from '../../public/assets/coins/avalanche.png'
 import bnb from '../../public/assets/coins/bnb.png'
+import { useContext } from 'react'
+import { CoinMarketContext } from '../context/context'
 
 const styles = {
   converter: `flex items-center justify-between bg-[#171924] border border-gray-500/10 px-5 py-5 rounded-xl`,
@@ -25,9 +27,10 @@ const CMCPriceConverter = ({
   toLogo,
   price,
 }) => {
-  // return (
-    // const { convertCrypto } = useContext(CoinMarketContext)
-    // console.log(convertCrypto)
+
+  const convertCrypto: any = {} = useContext(CoinMarketContext)
+  console.log("convertCrypto:")
+  console.log(convertCrypto)
   
   const coinIcon = () => {
     switch (from) {
@@ -156,9 +159,9 @@ const CMCPriceConverter = ({
 
   return (
     <div>
-      {/* <h2>
+      <h2>
         {fromSymbol} to {toSymbol} Converter
-      </h2> */}
+      </h2>
       <br />
       <div className={styles.converter}>
         <div>
@@ -194,9 +197,9 @@ const CMCPriceConverter = ({
         <p className='text-3xl'>${price}</p>
       </div>
 
-      {/* <div className={styles.convertButton} onClick={convertCrypto}>
+      <div className={styles.convertButton} onClick={convertCrypto}>
         Convert
-      </div> */}
+      </div>
     </div>
   )
 }

@@ -9,14 +9,14 @@ const Price = () => {
 
   useEffect(() => {
     getData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const getData = async () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-
     setCoinName(urlParams.get('coin'));
-    setPrice(Number(urlParams.get('price')).toLocaleString("0"));
+    setPrice(Number(urlParams.get(price)).toLocaleString());
     setCoinSymbol(urlParams.get('symbol'));
   }
 

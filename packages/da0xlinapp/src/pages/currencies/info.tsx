@@ -3,6 +3,7 @@ import Header from '../../components/Header'
 import solana from '../../../public/assets/coins/solana.png'
 import Usd from '../../../public/assets/coins/svg/usd'
 import { useEffect, useState } from 'react'
+import Graph from '../../components/Graph'
 // import Chat from '../../components/chat'
 
 const stylesInfo = {
@@ -62,7 +63,7 @@ const Currencies = () => {
               </div>
             </div>
             <br />
-            {/* <Graph /> */}
+            <Graph />
             <br />
             <div className={stylesInfo.flexBetweenCenter}>
               <div className='flex'>

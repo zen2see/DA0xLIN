@@ -1,7 +1,5 @@
 import React from 'react'
 import { Line } from 'react-chartjs-2'
-import Chart from 'chart.js/auto'
-
 
 const randomPoints = [
     [65, 59, 100, 80, 10, 56, 72, 45, 67, 55, 42],
@@ -59,9 +57,9 @@ const options = {
 }
 
 const Graph = () => {
-    // return (
-    //     <Line data={data} options={options} width={400} height={150} />
-    // )
+    return (
+        <Line data={data} options={options} width={400} height={150} />
+    )
 }
 
 export default Graph

@@ -11,15 +11,15 @@ const CMCTableRow = ({
   coinName,
   coinIcon,
   coinSymbol = '...',
-  price = '....',
-  hRate = '...',
-  dRate = '...',
+  price = 0,
+  hRate = 0,
+  dRate = 0,
   hRateIsIncrement,
   dRateIsIncrement,
-  marketCapValue = '...',    
-  volumeValue = '...',
-  volumeCryptoValue = '...',
-  circulatingSupply = '...',
+  marketCapValue = 0,    
+  volumeValue = 0,
+  volumeCryptoValue = 0,
+  circulatingSupply = 0,
 
 }): JSX.Element => {
 
@@ -44,7 +44,7 @@ const CMCTableRow = ({
   }
 
   const router = useRouter()
-
+ 
   const viewCoinDetails = () => {
     router.push(
       `/currencies/info?symbol=${coinSymbol}&coin=${coinName}&price=${price}`,
@@ -57,7 +57,7 @@ const CMCTableRow = ({
     )
   }
 
-  const formatNum = (num: string) => {
+  const formatNum = (num: number) => {
     return Number(num).toFixed(2).toLocaleString()
   }
 
@@ -85,10 +85,10 @@ const CMCTableRow = ({
           <p>${formatNum(price)}</p>
         </td>
         <td>
-          <Rate isIncrement={hRateIsIncrement} rate = {`${formatNum(hRate)}%`} />
+          <Rate isIncrement = {hRate > 0} rate = {`${formatNum(hRate)}%`} />
         </td>
         <td>
-          <Rate isIncrement={dRateIsIncrement} rate = {`${formatNum(dRate)}%`} />
+          <Rate isIncrement ={ dRate > 0} rate = {`${formatNum(dRate)}%`} />
         </td>
         <td>
           <div>
@@ -97,10 +97,10 @@ const CMCTableRow = ({
         </td>
         <td>
           <div>
-            {/* <p>{formatNum(volumeValue)}</p> */}
-            <p className={`text-gray-400`}>
+            <p>{formatNum(volumeValue)}</p> 
+            {/* <p className={`text-gray-400`}>
               {formatNum(volumeCryptoValue)} {coinSymbol}
-            </p>
+            </p> */}
           </div>
         </td>
         <td>

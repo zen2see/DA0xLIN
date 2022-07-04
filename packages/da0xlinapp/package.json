@@ -43,6 +43,7 @@
   },
   "nohoist": [
     "react",
-    "react-dom"
+    "react-dom",
+    "react-chartjs-2"
   ]
 }
