@@ -1,5 +1,5 @@
-import ChevronDown from "../../../public/assets/svg/chevronDown"
-import ChevronUp from "../../../public/assets/svg/chevronUp"
+import ChevronDown from "../../../public/assets/svg/chevronDown.svg"
+import ChevronUp from "../../../public/assets/svg/chevronUp.svg"
 
 const styles = {
     rate: `rate flex items-center`,
