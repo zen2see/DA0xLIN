@@ -9,11 +9,8 @@ packages/hardhat/*.txt
 node_modules
 packages/hardhat/artifacts*
 packages/hardhat/deployments
-packages/oneneverse/src/contracts/*
-!packages/oneneverse/src/contracts/external_contracts.js
 packages/hardhat/cache*
 packages/**/data
-!packages/oneneverse/src/contracts/contracts.js
 
 # ts
 packages/hardhat-ts/cache
