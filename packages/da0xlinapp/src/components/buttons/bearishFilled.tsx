@@ -1,4 +1,4 @@
-import ChevronDown from "../../../public/assets/svg/chevronDown"
+import ChevronDown from "../../../public/assets/svg/chevronDown.svg"
 
 const BearishFilled = () => {
     return <div className="flex items-center">
