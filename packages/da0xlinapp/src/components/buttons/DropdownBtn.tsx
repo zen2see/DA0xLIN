@@ -1,4 +1,4 @@
-import ChevronDown from '../../../public/assets/svg/ChevronDown'
+import ChevronDown from '../../../public/assets/svg/chevronDown.svg'
 
 const styles = {
   dropdown: `flex items-center mr-2 rounded-md px-2 bg-blue-700 cursor-pointer`,
