@@ -36,13 +36,6 @@ body {
   font-weight: bold;
 }
 
-#manageBackground {
-  background-image: url('../public/assets/images/bgtabletPattern.svg');
-  background-repeat: no-repeat;
-  background-size: 800px;
-  background-position: 90% -25%;
-}
-
 .hamburger {
   cursor: pointer;
   width: 24px;
@@ -148,15 +141,8 @@ body {
     radial-gradient(at 53% 75%, hsla(174, 94%, 68%, 1) 0, transparent 45%);
 }
 
-.text-gradient {
-  background-color: #fff;
-  background-image: radial-gradient(at 4% 36%, hsla(0, 0%, 100%, 1) 0, transparent 53%), radial-gradient(at 100% 60%, rgb(0, 0, 0) 0, transparent 50%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 .bannerDa0xlin {
-  background: url("../public/assets/bannerDa0xlin.svg");
+  background: url("/public/assets/images/bannerDa0xlin.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -165,7 +151,7 @@ body {
 }
 
 .banner {
-  background: url("../public/assets/banner.svg");
+  background: url("/public/assets/images/banner.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -174,7 +160,7 @@ body {
 }
 
 .banner02 {
-  background: url("../public/assets/banner02.svg");
+  background: url("/public/assets/images/banner02.svg");
   background-color: #0b65c6;
   background-size: cover;
   background-position: center;
@@ -184,7 +170,7 @@ body {
 }
 
 .banner03 {
-  background: url("../public/assets/banner03.svg");
+  background: url("/public/assets/images/banner03.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -193,7 +179,7 @@ body {
 }
 
 .banner04 {
-  background: url("../public/assets/banner04.svg");
+  background: url("/public/assets/images/banner04.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

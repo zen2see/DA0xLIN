@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Header from '../components/Header'
+import MainHeader from '../app/main/MainHeader'
 
 export const Home = (): JSX.Element => {
   return (
@@ -11,7 +11,7 @@ export const Home = (): JSX.Element => {
       </Head>
 
       <div className={`bannerDa0xlin min-h-screen`}>
-        <Header />
+        <MainHeader />
         <div className={`mt-10`} />
     
         <div className={`mt-5`} />

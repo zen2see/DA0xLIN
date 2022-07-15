@@ -35,5 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 
 # yarn
-../../.yarn/
-../../.yarnrc.yml
+.yarn/
+.yarnrc.yml

@@ -1,8 +1,15 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "lib": ["dom", "dom.iterable","esnext", "ES2017"],
+    "target": "ESNext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext",
+      "ES2017"
+    ],
     "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
     "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
@@ -12,7 +19,7 @@
     "allowSyntheticDefaultImports": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "es2020",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "typeRoots": [
@@ -26,22 +33,23 @@
   "rootDir": ".",
   "baseUrl": ".",
   "outDir": "dist",
-  "include": [
-    "src"
-    // "next-env.d.ts",
-    // "**/*.ts",
-    // "**/*.tsx",
-    // "src/**/*.ts*",
-    // "src/helpers/__global.ts",
-    // "src/pages/*",
-    // "./scripts",
-    // "./test",
-    // "next.config.js",
-    // "postcss.config.js",
-    // "tailwind.config.js",
-  ],
-  "paths": {"~~/*": [
-    "./src/*"
+  // "include": [
+  //   // "src",
+  //   // "next-env.d.ts",
+  //   // "**/*.ts",
+  //   // "**/*.tsx",
+  //   // "src/**/*.ts*",
+  //   // "src/helpers/__global.ts",
+  //   // "src/pages/*",
+  //   // "./scripts",
+  //   // "./test",
+  //   // "next.config.js",
+  //   // "postcss.config.js",
+  //   // "tailwind.config.js",
+  // ],"
+  "paths": {
+    "~~/*": [
+      "./src/*"
     ]
   },
   "exclude": [
@@ -52,5 +60,10 @@
     "node_modules",
     "**/.yalc/**/*",
     ".yalc/**/*"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
   ]
 }
