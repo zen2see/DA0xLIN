@@ -1,11 +1,8 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable","esnext", "ES2017"],
+    "sourceMap": true,
     "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
@@ -30,28 +27,21 @@
   "baseUrl": ".",
   "outDir": "dist",
   "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "src/**/*.ts*",
-    "src/helpers/__global.ts",
-    "pages/_app.tsx",
-    "./scripts",
-    "./test",
-    "next.config.js",
-    "postcss.config.js",
-    "postcss.config.js",
-    "tailwind.config.js",
-    "src/pages/_document.js",
-    "public/assets/coins/svg/search.js",
-    "public/assets/coins/svg/search.js",
-    "public/assets/coins/svg/chevronDown.jsx",
-    "src/components/cmcTables/Rate.js",
-    "src/pages/api/getTopTen.ts"
-, "src/components/CoinHeader.jsx", "src/components/cmc-table/cmcTable.js", "src/components/Coinheader.jsx", "src/components/Graph.js", "src/components/Graph.js"  ],
-  "paths": {
-    "src/*": [
-      "src/*"
+    "src"
+    // "next-env.d.ts",
+    // "**/*.ts",
+    // "**/*.tsx",
+    // "src/**/*.ts*",
+    // "src/helpers/__global.ts",
+    // "src/pages/*",
+    // "./scripts",
+    // "./test",
+    // "next.config.js",
+    // "postcss.config.js",
+    // "tailwind.config.js",
+  ],
+  "paths": {"~~/*": [
+    "./src/*"
     ]
   },
   "exclude": [
