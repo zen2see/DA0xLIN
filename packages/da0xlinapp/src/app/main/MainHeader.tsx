@@ -10,7 +10,7 @@ import z2savatarSmaller from '/public/assets/images/z2savatarSmaller.png'
 export const MainHeader = () => {
   return (
     <>
-      <div className={`flex items-center justify-between ${styles.bgDkEmerald}`}>
+      <div className={`flex items-center justify-between ${styles.bgDkEmerald} banner02`}>
         <div className={``}>
           <Link href='/'>
             <a>
@@ -23,6 +23,7 @@ export const MainHeader = () => {
             </a>
           </Link>
         </div>
+        <div>Sight is being remodeled!</div> 
       </div>
     </>
   )

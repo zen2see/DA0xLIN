@@ -3,16 +3,13 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Reggae+One&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Tourney&effect=fire:ital,wght@0,100;0,900;1,800;1,900&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Tourney:ital,wght@1,800&display=swap');
-
 @import url("https://fonts.googleapis.com/css?family=Audiowide|Sofia&effect=neon|outline|emboss|shadow-multiple|fire");
-
 @import url('https://fonts.googleapis.com/css2?family=Reggae+One&display=swap');
-
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;1,400&display=swap');
 
 * html {
   padding: 0;
@@ -23,9 +20,9 @@
 body {
   margin: 0;
   /* font-family: "Open Sans", sans-serif; */
-  font-family: 'Tourney', cursive;
+  font-family: 'Poppins', sams-serif;
   font-weight: 900;
-  font-style: italic;
+  font-style: bold;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #17171A;
@@ -142,7 +139,7 @@ body {
 }
 
 .bannerDa0xlin {
-  background: url("/public/assets/images/bannerDa0xlin.svg");
+  background: url("../public/assets/images/bannerDa0xlin.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -151,7 +148,7 @@ body {
 }
 
 .banner {
-  background: url("/public/assets/images/banner.svg");
+  background: url("../public/assets/images/banner.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -160,7 +157,7 @@ body {
 }
 
 .banner02 {
-  background: url("/public/assets/images/banner02.svg");
+  background: url("../public/assets/images/banner02.svg");
   background-color: #0b65c6;
   background-size: cover;
   background-position: center;
@@ -170,7 +167,7 @@ body {
 }
 
 .banner03 {
-  background: url("/public/assets/images/banner03.svg");
+  background: url("../public/assets/images/banner03.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -179,7 +176,7 @@ body {
 }
 
 .banner04 {
-  background: url("/public/assets/images/banner04.svg");
+  background: url("../public/assets/images/banner04.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -220,16 +217,3 @@ body {
     transform: translateZ(0);
   }
 }
-/* 
-body { 
-  background-color: #D57100; 
-  background: url("./assets/bannerDa0xlin.svg");
-  background-size: cover; 
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  width: 100vw; 
-} */
-
-
-/* background: #262728; */

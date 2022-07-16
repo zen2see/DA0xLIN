@@ -39,7 +39,7 @@ module.exports = {
     //   'full': '100%',
     //  },
     fontFamily: {
-      ReggaeOne: ["Reggae One", "cursive"]
+      ReggaeOne: []
     },
   },
   plugins: [],
