@@ -15,7 +15,7 @@ export const Home = (): JSX.Element => {
       <div className={`min-h-screen`}>
         <MainHeader />
         <div className={`mt-10 ml-20 text-red-300`}>
-          Sight is being remodeled!
+          Site is being remodeled!
         </div>  
         <div className={`mt-5`}>
         </div>      
