@@ -1,5 +1,7 @@
 import Head from 'next/head'
-import MainHeader from '../app/main/MainHeader'
+import MainHeader from './MainHeader'
+import styles from '../styles/Globals'
+import Button from './Button'
 
 export const Home = (): JSX.Element => {
   return (
@@ -10,13 +12,14 @@ export const Home = (): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={`bannerDa0xlin min-h-screen`}>
+      <div className={`min-h-screen`}>
         <MainHeader />
-        <div className={`mt-10`} />
-    
-        <div className={`mt-5`} />
+        <div className={`mt-10 ml-20 text-red-300`}>
+          Sight is being remodeled!
+        </div>  
+        <div className={`mt-5`}>
+        </div>      
         <div className={`px-20`}>
-      
         </div>
       </div>
     </>

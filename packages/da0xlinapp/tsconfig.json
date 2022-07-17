@@ -55,7 +55,7 @@
   "exclude": [
     "**/node_modules",
     ".husky",
-    "./src/styles/css",
+    "styles/css",
     "tailwind.config.ts",
     "node_modules",
     "**/.yalc/**/*",
