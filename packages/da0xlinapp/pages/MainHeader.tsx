@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { LedgerSigner } from '@ethersproject/hardware-wallets'
 import { getNetwork } from '@ethersproject/networks'
-import z2savatarSmaller from '/public/assets/images/z2savatarSmaller.png'
+import z2savatarSmaller from '../public/assets/images/z2savatarSmaller.png'
 
 
 export const MainHeader = () => {
