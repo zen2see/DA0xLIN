@@ -1,11 +1,8 @@
 import React from 'react'
-import styles from '../styles/Globals'
 import Image from 'next/image'
 import Link from 'next/link'
-import { LedgerSigner } from '@ethersproject/hardware-wallets'
-import { getNetwork } from '@ethersproject/networks'
-import z2savatarSmaller from '../public/assets/images/z2savatarSmaller.png'
-
+import z2savatarSmaller from '../../public/assets/images/z2savatarSmaller.png'
+import Wallet from './Wallet'
 
 export const MainHeader = () => {
   return (
@@ -23,6 +20,7 @@ export const MainHeader = () => {
             </a>
           </Link>
         </div> 
+        <Wallet />
       </div>
     </>
   )

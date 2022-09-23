@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import MainHeader from './MainHeader'
-import styles from '../styles/Globals'
-import Button from './Button'
+import MainFooter from './MainFooter'
 
 export const Home = (): JSX.Element => {
   return (
@@ -21,6 +20,7 @@ export const Home = (): JSX.Element => {
         </div>      
         <div className={`px-20`}>
         </div>
+        <MainFooter />
       </div>
     </>
   )

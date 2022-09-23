@@ -139,7 +139,7 @@ body {
 }
 
 .bannerDa0xlin {
-  background: url("../public/assets/images/bannerDa0xlin.svg");
+  background: url("../../public/assets/images/bannerDa0xlin.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -148,7 +148,7 @@ body {
 }
 
 .banner {
-  background: url("../public/assets/images/banner.svg");
+  background: url("../../public/assets/images/banner.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -157,7 +157,7 @@ body {
 }
 
 .banner02 {
-  background: url("../public/assets/images/banner02.svg");
+  background: url("../../public/assets/images/banner02.svg");
   background-color: #0b65c6;
   background-size: cover;
   background-position: center;
@@ -167,7 +167,7 @@ body {
 }
 
 .banner03 {
-  background: url("../public/assets/images/banner03.svg");
+  background: url("../../public/assets/images/banner03.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -176,7 +176,7 @@ body {
 }
 
 .banner04 {
-  background: url("../public/assets/images/banner04.svg");
+  background: url("../../public/assets/images/banner04.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
