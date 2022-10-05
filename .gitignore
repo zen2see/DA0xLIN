@@ -71,7 +71,7 @@ yarn-error.log*
 *.stackdump
 
 # next.js
-.next
+#.next
 packages/*/.next/
 /out/
 

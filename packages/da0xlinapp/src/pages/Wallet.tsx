@@ -3,7 +3,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import { ethers, providers } from 'ethers'
 import { useEffect, useState, useCallback, useReducer } from 'react'
 import { ellipseAddress, getChainData } from '../config/chaindata'
-import Web3Modal from 'web3Modal'
+import Web3Modal from 'web3modal'
 import styles from '../styles/Globals'
 
 const INFURA_ID = process.env.INFURA_PID
