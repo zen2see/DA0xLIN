@@ -238,29 +238,35 @@ export const Wallet = () => {
 
   return (
     <>
-      <div className={`text-slate-200 absolute top-4 right-40 w-100`}>
+      <div className={`text-slate-200`}>
+        {address ? (
+          <div className={` gap-[1px] pl-5 absolute top-2 right-40`}>
+            <div
+              className={`text-amber-400 text-sm mr-10`}
+              placeholder='Network'>{chainData?.name}
+            </div>
+            <div
+              className={`text-amber-200`}
+              placeholder='Address'>{ellipseAddress(address)}
+            </div>
+          </div>
+        ) :
+          <p className={``}></p>
+        }
         {web3Provider ? (
-          <button className={`${styles.btnDisconnect}`} onClick={disconnect}>
-            Disconnect wallet
-          </button>
+          <div className={`absolute top-4 right-5 w-100`}>
+            <button className={`${styles.btnDisconnect} mr-10 `} onClick={disconnect}>
+              Disconnect wallet
+            </button>
+          </div>
         ) : (
-          <button className={`${styles.btnConnect}`} onClick={connect}>
-            Connect wallet
-          </button>
+          <div className={`absolute top-4 right-5 w-100`}>
+            <button className={`${styles.btnConnect} mr-10 `} onClick={connect}>
+              Connect wallet
+            </button>
+          </div>
         )}
       </div>
-      {address ? (
-        <div className={` gap-[1px] pl-5 absolute top-2 right-6`}>
-          <div
-            className={`text-amber-400 text-sm`}
-            placeholder='Network'>{chainData?.name}
-          </div>
-          <div
-            className={`text-amber-200`}
-            placeholder='Address'>{ellipseAddress(address)}
-          </div>
-        </div>
-      ) : <p className={``} > </p>}
     </>
   )
 }
