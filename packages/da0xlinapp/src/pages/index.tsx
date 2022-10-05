@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Globals'
 import MainHeader from './MainHeader'
 import MainFooter from './MainFooter'
-import { Billing, Business, Clients, CardDeal, CTA, Stats, Testimonials, Hero, } from './componentsjsm'
+import Billing, { Business, Clients, CardDeal, CTA, Stats, Testimonials, Hero, } from './componentsjsm'
 
 export const Home = (): JSX.Element => {
   return (
