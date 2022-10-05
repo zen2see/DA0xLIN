@@ -6,12 +6,13 @@ import Clients from './Clients'
 import CTA from './CTA'
 import FeedbackCard from './FeedbackCard'
 import GetStarted from './GetStarted'
+import Hero from './Hero'
 import Stats from './Stats'
 import Testimonials from './Testimonials'
-import Hero from './Hero'
 
-export {
-  Billing,
+
+export { 
+  Billing as default,
   Business,
   Buttonjsm,
   CardDeal,
